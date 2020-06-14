@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Play Grounds</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Court name</th>
+      <th>Content</th>
+      <th>Place</th>
+      <th>Status</th>
+      <th>Release</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @play_grounds.each do |play_ground| %>
+      <tr>
+        <td><%= play_ground.address %></td>
+        <td><%= play_ground.latitude %></td>
+        <td><%= play_ground.longitude %></td>
+        <td><%= play_ground.court_name %></td>
+        <td><%= play_ground.content %></td>
+        <td><%= play_ground.place %></td>
+        <td><%= play_ground.status %></td>
+        <td><%= play_ground.release %></td>
+        <td><%= play_ground.user_id %></td>
+        <td><%= link_to 'Show', play_ground %></td>
+        <td><%= link_to 'Edit', edit_play_ground_path(play_ground) %></td>
+        <td><%= link_to 'Destroy', play_ground, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Play Ground', new_play_ground_path %>

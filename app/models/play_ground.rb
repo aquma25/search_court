@@ -1,0 +1,2 @@
+class PlayGround < ApplicationRecord
+end
