@@ -12,4 +12,7 @@
   <body>
     <%= yield %>
   </body>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GMAP_API_KEY'] %>&callback=initMap"></script> <!-- TODO：環境変数を本番に設定 -->
+  <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
 </html>

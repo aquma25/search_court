@@ -69,6 +69,7 @@ class PlayGroundsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def play_ground_params
-      params.require(:play_ground).permit(:address, :latitude, :longitude, :court_name, :content, :place, :status, :release, :user_id)
+      req_params = params.require(:play_ground).permit(:address, :latitude, :longitude, :court_name, :content, :place, :status, :release)
+      req_params.merge(user_id: current_user.id) if current_user.present?
     end
 end
