@@ -1,37 +1,41 @@
-let map
-let geocoder
-
+// 初期のMap表示の設定
 function initMap(){
-  // geocoderを初期化
-  geocoder = new google.maps.Geocoder()
+  var play_grounds_json = document.getElementById("play_grounds_json").value;
+  var grounds_array = JSON.parse(play_grounds_json);
 
-  // 初期のプレイグラウンド名を表示
-  var court_name = document.getElementById("court_name")
-  court_name.innerHTML = "代々木公園バスケットコート";
+  // 初期のプレイグラウンド名を複数表示
+  var courtName = document.getElementById("court_name")
+  courtName.innerHTML = grounds_array[0].court_name;
 
+  // 初期の緯度、軽度の設定
   init_latlng = {
-    lat: 35.6673, lng: 139.695
+    lat: grounds_array[0].latitude,
+    lng: grounds_array[0].longitude
   }
 
-  show_the_marker(court_name, init_latlng)
-}
+  var mapLatLng = new google.maps.LatLng(init_latlng);
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: mapLatLng, // 地図の中心を指定
+    zoom: 12 // 地図のズームを指定
+  });
 
-function show_the_marker(court_name, init_latlng) {
-  // 地図を表示する際のオプションを設定
-  var mapOptions = {
-    center: new google.maps.LatLng(init_latlng.lat, init_latlng.lng),
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
+  for (const ground of grounds_array) {
+    latlng = {
+      lat: ground.latitude,
+      lng: ground.longitude
+    }
 
-  // Mapオブジェクトに地図表示要素情報とオプション情報を渡し、Mapとマーカーを表示
-  map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  myMarker = new google.maps.Marker({ position: init_latlng, map: map });
-  comment_in_marker(court_name.innerHTML, myMarker)
+    markerLatLng = new google.maps.LatLng(latlng);
+    myMarker = new google.maps.Marker({ // マーカーの追加
+      position: markerLatLng, // マーカーを立てる位置を指定
+      map: map // マーカーを立てる地図を指定
+    });
+    commentInMarker(ground.court_name, myMarker)
+  }
 }
 
 // マーカーに吹き出しを表示出来るようにする
-function comment_in_marker(comment, myMarker) {
+function commentInMarker(comment, myMarker) {
   var myInfoWindow = new google.maps.InfoWindow({
     content: comment // 吹き出しに出す文
   });
@@ -45,22 +49,31 @@ function comment_in_marker(comment, myMarker) {
 }
 
 // ShowMapボタン押下でMap上に該当プレイグラウンドのマーカーを追加していく
-function disp_marker(lat, lng, id, indx_num, inout, env) {
-  var court_place = document.getElementById(inout + "court_" + indx_num).value;
+function dispMarker(lat, lng, id, indx_num, inout, env) {
+  var courtPlace = document.getElementById(inout + "court_" + indx_num).value;
 
-  if (env == "development"){
+  if (env == "development") {
     var path = "localhost:3000"
-  } else if (env == "production"){
+  } else if (env == "production") {
     var path = "18.177.66.221"
   }
-  var show_url = "</br><a href=" + "http://" + path + "/play_grounds/" + id + ">" + "詳細を表示する" + "</a>"
+  var showUrl = "</br><a href=" + "http://" + path + "/play_grounds/" + id + ">" + "詳細を表示する" + "</a>"
+  court_name.innerHTML = courtPlace;
 
-  court_name.innerHTML = court_place;
-  myMarker = new google.maps.Marker({
-    position: { lat: lat, lng: lng }, // マーカーを立てる位置を指定
-    map: map // マーカーを立てる地図を指定
+  latlng = {
+    lat: lat,
+    lng: lng
+  }
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: latlng,
+    zoom: 15
   });
-  map.setCenter(new google.maps.LatLng(lat, lng));
+  myMarker = new google.maps.Marker({
+    position: latlng,
+    map: map
+  });
+  map.setCenter(new google.maps.LatLng(latlng));
 
-  comment_in_marker(court_name.innerHTML + show_url, myMarker)
+  commentInMarker(court_name.innerHTML + showUrl, myMarker)
 }

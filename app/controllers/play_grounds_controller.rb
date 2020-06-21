@@ -5,6 +5,7 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds.json
   def index
     @play_grounds = PlayGround.all
+    @play_grounds_json = @play_grounds.to_json
   end
 
   # GET /play_grounds/1
