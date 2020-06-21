@@ -1,8 +1,24 @@
-<h2>gmap</h2>
+<h2 id="court_name"></h2>
 
-<!-- 地名入力用のinputを追加 -->
-<input id="address" type="textbox" value="Sydney, NSW">
-
-<!-- buttonをクリックしたらcodeAddressを実行　-->
-<input type="button" value="Encode" onclick="codeAddress()">
+<!-- GoogleMap表示 -->
 <div id='map'></div>
+
+<% @play_grounds&.each.with_index(1) do |court, index| %>
+  <p><%= court.court_name %></p>
+  <p><%= court.content %></p>
+  <%= link_to "詳細を表示する", play_ground_path(court.id) %><br/>
+  <!-- 地名入力用のinputを追加 -->
+  <input class="disp_none" id="street_court_<%= index %>" type="textbox" value="<%= court.court_name %>">
+
+  <!-- buttonをクリックしたらdisp_markerを実行　-->
+  <input type="button" value="ShowMap"
+    onclick="disp_marker(
+      <%= court.latitude.to_f %>,
+      <%= court.longitude.to_f %>,
+      <%= court.id %>,
+      <%= index %>,
+      'street_',
+      '<%= Rails.env %>'
+    )"
+  >
+<% end %>
