@@ -6,6 +6,7 @@ class PlayGroundsController < ApplicationController
   def index
     @play_grounds = PlayGround.all
     @play_grounds_json = @play_grounds.to_json
+    @rails_path = PlayGround.convert_env_to_path(Rails.env)
   end
 
   # GET /play_grounds/1

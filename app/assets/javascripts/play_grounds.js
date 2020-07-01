@@ -1,5 +1,6 @@
 // 初期のMap表示の設定
 function initMap(){
+  var rails_path = document.getElementById("rails_path").value;
   var play_grounds_json = document.getElementById("play_grounds_json").value;
   var grounds_array = JSON.parse(play_grounds_json);
 
@@ -19,6 +20,7 @@ function initMap(){
     zoom: 12 // 地図のズームを指定
   });
 
+  // コート情報を取得していく
   for (const ground of grounds_array) {
     latlng = {
       lat: ground.latitude,
@@ -30,7 +32,9 @@ function initMap(){
       position: markerLatLng, // マーカーを立てる位置を指定
       map: map // マーカーを立てる地図を指定
     });
-    commentInMarker(ground.court_name, myMarker)
+
+    var showUrl = "</br><a href=" + "http://" + rails_path + "/play_grounds/" + ground.id + ">" + "詳細を表示する" + "</a>"
+    commentInMarker(ground.court_name + showUrl, myMarker)
   }
 }
 
@@ -49,14 +53,8 @@ function commentInMarker(comment, myMarker) {
 }
 
 // ShowMapボタン押下でMap上に該当プレイグラウンドのマーカーを追加していく
-function dispMarker(lat, lng, id, indx_num, inout, env) {
+function dispMarker(lat, lng, id, indx_num, inout, path) {
   var courtPlace = document.getElementById(inout + "court_" + indx_num).value;
-
-  if (env == "development") {
-    var path = "localhost:3000"
-  } else if (env == "production") {
-    var path = "18.177.66.221"
-  }
   var showUrl = "</br><a href=" + "http://" + path + "/play_grounds/" + id + ">" + "詳細を表示する" + "</a>"
   court_name.innerHTML = courtPlace;
 
