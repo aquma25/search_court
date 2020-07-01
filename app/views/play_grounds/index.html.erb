@@ -5,6 +5,8 @@
 
 <!-- play_groundのRecordを持ってくる -->
 <input type="hidden" id="play_grounds_json" value="<%= @play_grounds_json %>">
+<!-- 現環境を確認する -->
+<input type="hidden" id="rails_path" value="<%= @rails_path %>">
 
 <% @play_grounds&.each.with_index(1) do |court, index| %>
   <p>name: <%= court.court_name %></p>
@@ -21,7 +23,7 @@
       <%= court.id %>,
       <%= index %>,
       'street_',
-      '<%= Rails.env %>'
+      '<%= @rails_path %>'
     )"
   >
 <% end %>
