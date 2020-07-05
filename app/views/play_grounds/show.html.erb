@@ -1,49 +1,33 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: "shared/header" %>
 
-<p>
-  <strong>Address:</strong>
-  <%= @play_ground.address %>
-</p>
+<div class="show_content">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @play_ground.latitude %>
-</p>
+  <%= link_to 'Edit', edit_play_ground_path(@play_ground) %> |
+  <%= link_to 'Back', play_grounds_path %><br/><br/>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @play_ground.longitude %>
-</p>
+  <p>
+    <strong>Court name:</strong>
+    <%= @play_ground.court_name %>
+  </p>
 
-<p>
-  <strong>Court name:</strong>
-  <%= @play_ground.court_name %>
-</p>
+  <p>
+    <strong>Address:</strong>
+    <%= @play_ground.address %>
+  </p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @play_ground.content %>
-</p>
+  <p>
+    <strong>Content:</strong><br/>
+    <%= @play_ground.content %>
+  </p>
 
-<p>
-  <strong>Place:</strong>
-  <%= @play_ground.place %>
-</p>
+  <p>
+    <strong>Place:</strong>
+    <%= @play_ground.place %>
+  </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @play_ground.status %>
-</p>
-
-<p>
-  <strong>Release:</strong>
-  <%= @play_ground.release %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @play_ground.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_play_ground_path(@play_ground) %> |
-<%= link_to 'Back', play_grounds_path %>
+  <p>
+    <strong>Status:</strong>
+    <%= @play_ground.status %>
+  </p>
+</div>

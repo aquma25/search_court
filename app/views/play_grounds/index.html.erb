@@ -1,24 +1,12 @@
-<div class="header">
-  <ul class="header_ul">
-    <a href="#">
-      <li id="logo">
-        <img src="https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fncaa%2F500%2F127.png" id="header_img">
-      </li>
-    </a>
-    <a href="#"><li class="header_link"><i class="fas fa-sign-in-alt"></i><br/>login</li></a>
-    <a href="#"><li class="header_link"><i class="far fa-comment"></i><br/>comment</li></a>
-    <a href="#"><li class="header_link"><i class="fas fa-user-circle"></i><br/>profile</li></a>
-  </ul>
-</div>
+<%= render partial: "shared/header" %>
 
 <h1 id="court_name"></h1>
 
 <!-- GoogleMap表示 -->
 <div id='map'></div>
 
-<!-- play_groundのRecordを持ってくる -->
+<!-- play_groundコントローラのインスタンス変数をJS側に送る -->
 <input type="hidden" id="play_grounds_json" value="<%= @play_grounds_json %>">
-<!-- 現環境を確認する -->
 <input type="hidden" id="rails_path" value="<%= @rails_path %>">
 
 <% @play_grounds&.each.with_index(1) do |court, index| %>
