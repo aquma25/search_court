@@ -1,3 +1,168 @@
-#map{
-  height: 400px;
+
+/*携帯用のcssを記述*/
+@media screen and (max-width: 639px) {
+  .header {
+    height: 100px;
+    width: 100%;
+    display: inline-block;
+  }
+
+  #header_img {
+    height:70px;
+    width:70px;
+  }
+
+  a:hover {
+    color: indianRed;
+  }
+
+  #logo {
+    float: left;
+    margin: 2px 0 0 2px;
+  }
+
+  ul.header_ul {
+    width: 100%;
+    // border: 1px solid red;
+    font-size: 0px;
+    display: inline-block;
+  }
+  
+  ul.header_ul li {
+    width: 23%;
+    // border: 1px solid black;
+    text-align: center;
+    font-size: 14px;
+    float: right;
+  }
+
+  .header_link {
+    margin: 20px 4px 0 0;
+  }
+
+  #court_name {
+    margin: 0 0 2px 2px;
+  }
+
+  #map {
+    height: 300px;
+    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+  }
+
+  // courtCardDesign
+  .card {
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .16);
+    color: #212121;
+    text-decoration: none;
+    margin: .9rem;
+  }
+  
+  .card__header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .card__title {
+    padding: 1rem 1rem 0;
+    font-size: 1.25rem;
+    order: 1;
+  }
+  
+  .card__body {
+    padding: 1rem;
+  }
+  
+  .card__text {
+    font-size: .75rem;
+  }
+  
+  .card__text + .card__text {
+    margin-top: .5rem;
+  }
+  
+  .card__text.-number {
+    text-align: right;
+  }
+  
+  .card__footer {
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+  }
+
+  // showMapButton
+  .btn-square-slant {
+    display: inline-block;
+    position: relative;
+    padding: 0.5em 1.4em;
+    text-decoration: none;
+    background: #668ad8;/*ボタン色*/
+    color: #FFF;
+    border-bottom: solid 5px #36528c;/*ボタン色より暗めに*/
+    border-right: solid 5px #5375bd;/*ボタン色より暗めに*/
+  }
+  
+  .btn-square-slant:before {  
+    content: " ";
+    position: absolute;
+    bottom: -5px;
+    left: -1px;
+    width: 0;
+    height: 0;
+    border-width: 0 6px 6px 0px;
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #FFF;
+  }
+  
+  .btn-square-slant:after {  
+    content: " ";
+    position: absolute;
+    top: -1px;
+    right: -5px;
+    width: 0;
+    height: 0;
+    border-width: 0px 6px 6px 0px;
+    border-style: solid;
+    border-color: #FFF;
+    border-bottom-color: transparent;
+  }
+  
+  .btn-square-slant:active {
+    /*ボタンを押したとき*/
+    border:none;
+    -webkit-transform: translate(6px,6px);
+    transform: translate(6px,6px);
+  }
+  
+  .btn-square-slant:active:after, .btn-square-slant:active:before {
+    content: none;/*ボタンを押すと線が消える*/
+  }
+
+}
+
+
+/*tablet用のcssを記述*/
+@media only screen and (min-width: 640px) and (max-width: 1023px) {
+
+}
+
+/*PC用のcssを記述*/
+@media screen and (min-width: 1024px) {
+  #map {
+    height: 400px;
+  }
+  .box_head {
+    width: 70%;
+    margin: 5px;
+    padding: 5px;
+    border: solid 2px #1f1c1c;
+    background-color: #ccc;
+  }
+
+  a:hover {
+    color: indianRed;
+    text-decoration: inherit;
+  }
+
 }
