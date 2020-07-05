@@ -1,4 +1,17 @@
-<h2 id="court_name"></h2>
+<div class="header">
+  <ul class="header_ul">
+    <a href="#">
+      <li id="logo">
+        <img src="https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fncaa%2F500%2F127.png" id="header_img">
+      </li>
+    </a>
+    <a href="#"><li class="header_link"><i class="fas fa-sign-in-alt"></i><br/>login</li></a>
+    <a href="#"><li class="header_link"><i class="far fa-comment"></i><br/>comment</li></a>
+    <a href="#"><li class="header_link"><i class="fas fa-user-circle"></i><br/>profile</li></a>
+  </ul>
+</div>
+
+<h1 id="court_name"></h1>
 
 <!-- GoogleMap表示 -->
 <div id='map'></div>
@@ -9,21 +22,28 @@
 <input type="hidden" id="rails_path" value="<%= @rails_path %>">
 
 <% @play_grounds&.each.with_index(1) do |court, index| %>
-  <p>name: <%= court.court_name %></p>
-  <p>content: <%= court.content %></p>
-  <%= link_to "詳細を表示する", play_ground_path(court.id) %><br/><br/>
-  <!-- 地名入力用のinputを追加 -->
-  <input id="street_court_<%= index %>" type="hidden" value="<%= court.court_name %>">
+  <article class="card">
+    <div class="card__header">
+      <h3 class="card__title"><%= court.court_name %></h3>
+    </div>
+    <div class="card__body">
+      <p class="card__text">content: <%= court.content %></p>
+      <input id="street_court_<%= index %>" type="hidden" value="<%= court.court_name %>"><br/>
 
-  <!-- buttonをクリックしたらdisp_markerを実行　-->
-  <input type="button" value="ShowMap"
-    onclick="dispMarker(
-      <%= court.latitude.to_f %>,
-      <%= court.longitude.to_f %>,
-      <%= court.id %>,
-      <%= index %>,
-      'street_',
-      '<%= @rails_path %>'
-    )"
-  >
+      <!-- buttonをクリックしたらdisp_markerを実行　-->
+      <input type="button" value="ShowMap" class="btn-square-slant"
+        onclick="dispMarker(
+          <%= court.latitude.to_f %>,
+          <%= court.longitude.to_f %>,
+          <%= court.id %>,
+          <%= index %>,
+          'street_',
+          '<%= @rails_path %>'
+        )"
+      >
+    </div>
+    <div class="card__footer">
+      <p class="card__text"><%= link_to "詳細を表示する", play_ground_path(court.id), class:"button -compact" %></p>
+    </div>
+  </article>
 <% end %>
