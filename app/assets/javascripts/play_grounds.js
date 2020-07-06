@@ -1,36 +1,41 @@
 // 初期のMap表示の設定
 function initMap(){
-  var rails_path = document.getElementById("rails_path").value;
-  var play_grounds_json = document.getElementById("play_grounds_json").value;
-  var grounds_array = JSON.parse(play_grounds_json);
+  // TODO:action:indexを通る時のみ処理を通さないとエラる。将来的に要修正。
+  if (document.getElementById("rails_path")) {
+    var rails_path = document.getElementById("rails_path").value;
+    var play_grounds_json = document.getElementById("play_grounds_json").value;
+    var grounds_array = JSON.parse(play_grounds_json);
 
-  // 初期の緯度、軽度の設定
-  init_latlng = {
-    lat: grounds_array[0].latitude,
-    lng: grounds_array[0].longitude
-  }
-
-  var mapLatLng = new google.maps.LatLng(init_latlng);
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: mapLatLng, // 地図の中心を指定
-    zoom: 10 // 地図のズームを指定
-  });
-
-  // 複数のコート情報を取得していく
-  for (const ground of grounds_array) {
-    latlng = {
-      lat: ground.latitude,
-      lng: ground.longitude
+    // 初期の緯度、軽度の設定
+    init_latlng = {
+      lat: grounds_array[0].latitude,
+      lng: grounds_array[0].longitude
     }
 
-    markerLatLng = new google.maps.LatLng(latlng);
-    myMarker = new google.maps.Marker({ // マーカーの追加
-      position: markerLatLng, // マーカーを立てる位置を指定
-      map: map // マーカーを立てる地図を指定
+    var mapLatLng = new google.maps.LatLng(init_latlng);
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: mapLatLng, // 地図の中心を指定
+      zoom: 10 // 地図のズームを指定
     });
 
-    var showUrl = "</br><a href=" + "http://" + rails_path + "/play_grounds/" + ground.id + ">" + "詳細を表示" + "</a>"
-    dispCommentInMarker(ground.court_name + showUrl, myMarker)
+    // 複数のコート情報を取得していく
+    for (const ground of grounds_array) {
+      latlng = {
+        lat: ground.latitude,
+        lng: ground.longitude
+      }
+
+      markerLatLng = new google.maps.LatLng(latlng);
+      myMarker = new google.maps.Marker({ // マーカーの追加
+        position: markerLatLng, // マーカーを立てる位置を指定
+        map: map // マーカーを立てる地図を指定
+      });
+
+      var showUrl = "</br><a href=" + "http://" + rails_path + "/play_grounds/" + ground.id + ">" + "詳細を表示" + "</a>"
+      dispCommentInMarker(ground.court_name + showUrl, myMarker)
+    }
+  } else {
+    return
   }
 }
 
