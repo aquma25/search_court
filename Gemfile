@@ -66,4 +66,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Add Gems...
 gem 'mini_racer', platforms: :ruby
 gem 'dotenv-rails'
+gem "jquery-rails"
 gem 'geocoder'

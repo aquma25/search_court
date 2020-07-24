@@ -1,42 +1,46 @@
+// ex) http://localhost:3000
+const url = location.protocol + '//' +  location.hostname + ':' +  location.port
+
 // 初期のMap表示の設定
 function initMap(){
-  // TODO:action:indexを通る時のみ処理を通さないとエラる。将来的に要修正。
-  if (document.getElementById("rails_path")) {
-    var rails_path = document.getElementById("rails_path").value;
-    var play_grounds_json = document.getElementById("play_grounds_json").value;
-    var grounds_array = JSON.parse(play_grounds_json);
-
-    // 初期の緯度、軽度の設定
-    init_latlng = {
-      lat: grounds_array[0].latitude,
-      lng: grounds_array[0].longitude
-    }
-
-    var mapLatLng = new google.maps.LatLng(init_latlng);
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: mapLatLng, // 地図の中心を指定
-      zoom: 10 // 地図のズームを指定
-    });
-
-    // 複数のコート情報を取得していく
-    for (const ground of grounds_array) {
-      latlng = {
-        lat: ground.latitude,
-        lng: ground.longitude
+  $.ajax({
+    type: 'POST',
+    url: url + '/play_grounds/init_map',
+    data: {
+      authenticity_token: $("head meta[name=csrf-token]").attr("content")
+    },
+    success: function(data) {
+      init_latlng = {
+        lat: data.play_grounds[0].latitude,
+        lng: data.play_grounds[0].longitude
       }
-
-      markerLatLng = new google.maps.LatLng(latlng);
-      myMarker = new google.maps.Marker({ // マーカーの追加
-        position: markerLatLng, // マーカーを立てる位置を指定
-        map: map // マーカーを立てる地図を指定
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: init_latlng,
+        zoom: 10
       });
 
-      var showUrl = "</br><a href=" + "http://" + rails_path + "/play_grounds/" + ground.id + ">" + "詳細を表示" + "</a>"
-      dispCommentInMarker(ground.court_name + showUrl, myMarker)
+      // 複数のコート情報を取得していく
+      for (const ground of data.play_grounds) {
+        latlng = {
+          lat: ground.latitude,
+          lng: ground.longitude
+        }
+
+        markerLatLng = new google.maps.LatLng(latlng);
+        myMarker = new google.maps.Marker({
+          position: markerLatLng,
+          map: map
+        });
+
+        var showUrl = "</br><a href=" + url + "/play_grounds/" + ground.id + ">" + "詳細を表示" + "</a>"
+        dispCommentInMarker(ground.court_name + showUrl, myMarker)
+      }
+    },
+    error: function() {
+      //取得失敗時に実行する処理
+      console.log("何らかの理由で失敗しました");
     }
-  } else {
-    return
-  }
+  });
 }
 
 // マーカーをクリックして吹き出しを表示出来るようにする
@@ -53,9 +57,9 @@ function dispCommentInMarker(comment, myMarker) {
 }
 
 // ShowMapボタン押下でMap上に該当プレイグラウンドのマーカーを追加していく
-function dispMarker(lat, lng, id, indx_num, inout, path) {
+function dispMarker(lat, lng, id, indx_num, inout) {
   var courtPlace = document.getElementById(inout + "court_" + indx_num).value;
-  var showUrl = "</br><a href=" + "http://" + path + "/play_grounds/" + id + ">" + "詳細を表示" + "</a>"
+  var showUrl = "</br><a href=" + url + "/play_grounds/" + id + ">" + "詳細を表示" + "</a>"
   court_name.innerHTML = courtPlace;
 
   latlng = {
