@@ -5,10 +5,6 @@
 <!-- GoogleMap表示 -->
 <div id='map'></div>
 
-<!-- play_groundコントローラのインスタンス変数をJS側に送る -->
-<input type="hidden" id="play_grounds_json" value="<%= @play_grounds_json %>">
-<input type="hidden" id="rails_path" value="<%= @rails_path %>">
-
 <% @play_grounds&.each.with_index(1) do |court, index| %>
   <article class="card">
     <div class="card__header">

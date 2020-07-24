@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root to: "play_grounds#index"
   resources :play_grounds
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post "play_grounds/init_map", to: "play_grounds#init_map"
 end
