@@ -5,7 +5,7 @@
 <!-- GoogleMap表示 -->
 <div id='map'></div>
 
-<% @play_grounds&.each.with_index(1) do |court, index| %>
+<% @places&.each.with_index(1) do |court, index| %>
   <article class="card">
     <div class="card__header">
       <h3 class="card__title"><%= court.court_name %></h3>
@@ -31,3 +31,14 @@
     </div>
   </article>
 <% end %>
+
+
+<!-- indexページのinitial暫定対応(TODO: jsファイルに移行したい) -->
+<script type="text/javascript">
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: { id: 'map' }}, function(){
+    markers = handler.addMarkers(<%= raw(@hash_json) %>);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  });
+</script>

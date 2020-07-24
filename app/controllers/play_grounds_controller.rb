@@ -4,12 +4,13 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds
   # GET /play_grounds.json
   def index
-    @play_grounds = PlayGround.all
-  end
-
-  def init_map
-    play_grounds = PlayGround.all
-    render json: { play_grounds: play_grounds }
+    @places = PlayGround.all
+    markers = Gmaps4rails.build_markers(@places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow render_to_string(partial: "play_grounds/infowindow", locals: { place: place })
+    end
+    @hash_json = JSON.dump(markers)
   end
 
   # GET /play_grounds/1
