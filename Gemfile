@@ -68,3 +68,4 @@ gem 'mini_racer', platforms: :ruby
 gem 'dotenv-rails'
 gem "jquery-rails"
 gem 'geocoder'
+gem 'gmaps4rails'

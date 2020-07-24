@@ -1,0 +1,2 @@
+<%= link_to place.court_name + "(詳細へ)", play_ground_path(place) %><br/>
+<%= link_to "GoogleMapを開く" ,"https://maps.google.co.jp/maps?q=loc:#{place.latitude},#{place.longitude}&iwloc=J",target: "_blank" %>
