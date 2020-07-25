@@ -5,17 +5,22 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds.json
   def index
     @places = PlayGround.all
+
     markers = Gmaps4rails.build_markers(@places) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
       marker.infowindow render_to_string(partial: "play_grounds/infowindow", locals: { place: place })
     end
-    @hash_json = JSON.dump(markers)
+
+    @criteria_marker_json = JSON.dump(markers[0])
+    @markers_json = JSON.dump(markers)
   end
 
   # GET /play_grounds/1
   # GET /play_grounds/1.json
   def show
+    @start_time = @play_ground.start_time&.strftime("%H:%M")
+    @end_time = @play_ground.end_time&.strftime("%H:%M")
   end
 
   # GET /play_grounds/new
@@ -34,7 +39,7 @@ class PlayGroundsController < ApplicationController
 
     respond_to do |format|
       if @play_ground.save
-        format.html { redirect_to @play_ground, notice: 'Play ground was successfully created.' }
+        formtimeat.html { redirect_to @play_ground, notice: 'Play ground was successfully created.' }
         format.json { render :show, status: :created, location: @play_ground }
       else
         format.html { render :new }

@@ -8,8 +8,9 @@
   }
 
   #header_img {
-    height:70px;
-    width:70px;
+    height:45px;
+    width:95px;
+    margin: 15px 0 0 1px;
   }
 
   a:hover {
@@ -37,9 +38,10 @@
   }
 
   .header_link {
-    margin: 20px 4px 0 0;
+    margin: 20px 2px 0 0;
   }
 
+  // index
   #court_name {
     margin: 0 0 2px 2px;
   }
@@ -140,7 +142,11 @@
   }
 
   // show page
-  .show_content {
+  .show_rap {
+    margin: 5px;
+  }
+
+  .show_cont {
     margin: 5px;
   }
 
