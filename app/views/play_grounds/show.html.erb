@@ -1,10 +1,8 @@
-<%= render partial: "shared/header" %>
-
 <div class="show_rap">
-  <p id="notice"><%= notice %></p>
 
-  <%= link_to 'Edit', edit_play_ground_path(@play_ground) %> |
-  <%= link_to 'Back', play_grounds_path %><br/><br/>
+  <% if current_user&.id == 1 %>
+    <%= link_to 'Edit', edit_play_ground_path(@play_ground) %>
+  <% end %>
 
   <p>
     <strong class="show_cont">場所名:</strong>

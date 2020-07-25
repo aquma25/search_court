@@ -1,12 +1,22 @@
 <div class="header">
   <ul class="header_ul">
-    <a href="/play_grounds">
+    <%= link_to(root_path) do %>
       <li id="logo">
         <%= image_tag 'logo.png', id:"header_img" %>
       </li>
-    </a>
-    <a href="#"><li class="header_link"><i class="fas fa-sign-in-alt"></i><br/>login</li></a>
-    <a href="#"><li class="header_link"><i class="far fa-comment"></i><br/>comment</li></a>
-    <a href="#"><li class="header_link"><i class="fas fa-user-circle"></i><br/>profile</li></a>
+    <% end %>
+    <% if user_signed_in? %>
+      <%= link_to(destroy_user_session_path, method: :delete) do %>
+        <li class="header_link"><i class="fas fa-sign-in-alt"></i><br/>logout</li>
+      <% end %>
+      <%= link_to(user_path(current_user.id)) do %>
+        <li class="header_link"><i class="fas fa-user-circle"></i><br/>profile</li>
+      <% end %>
+    <% else %>
+      <%= link_to(new_user_session_path) do %>
+        <li class="header_link"><i class="fas fa-sign-in-alt"></i><br/>login</li>
+      <% end %>
+    <% end %>
   </ul>
 </div>
+<p id="notice"><%= notice %></p>
