@@ -33,12 +33,18 @@
 <% end %>
 
 
-<!-- indexページのinitial暫定対応(TODO: jsファイルに移行したい) -->
+<!-- indexページのinitial暫定対応(TODO:いつかjsファイルに移行したい) -->
 <script type="text/javascript">
-  handler = Gmaps.build('Google');
+  var handler = Gmaps.build('Google');
+  var dispMarkers = <%= raw(@markers_json) %>
+  var criteria_marker = <%= raw(@criteria_marker_json) %>
+
+  // 登録したコートを表示していく
   handler.buildMap({ provider: {}, internal: { id: 'map' }}, function(){
-    markers = handler.addMarkers(<%= raw(@hash_json) %>);
+    markers = handler.addMarkers(dispMarkers);
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
+    handler.getMap().setCenter(new google.maps.LatLng(criteria_marker.lat, criteria_marker.lng));
+    handler.getMap().setZoom(10);
   });
 </script>

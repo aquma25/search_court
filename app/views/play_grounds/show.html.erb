@@ -1,33 +1,61 @@
 <%= render partial: "shared/header" %>
 
-<div class="show_content">
+<div class="show_rap">
   <p id="notice"><%= notice %></p>
 
   <%= link_to 'Edit', edit_play_ground_path(@play_ground) %> |
   <%= link_to 'Back', play_grounds_path %><br/><br/>
 
   <p>
-    <strong>Court name:</strong>
+    <strong class="show_cont">場所名:</strong>
     <%= @play_ground.court_name %>
   </p>
 
   <p>
-    <strong>Address:</strong>
+    <strong class="show_cont">利用可能な時間帯:</strong>
+    <% if @play_ground.end_time %>
+      <%= @start_time %>~<%= @end_time %>
+    <% else %>
+      <strong>時間指定なし</strong>
+    <% end %>
+  </p>
+
+  <p>
+    <strong class="show_cont">最寄駅:</strong>
+    <%= @play_ground.nearest_station %>駅
+  </p>
+
+  <p>
+    <strong class="show_cont">住所:</strong>
     <%= @play_ground.address %>
   </p>
 
   <p>
-    <strong>Content:</strong><br/>
-    <%= @play_ground.content %>
-  </p>
-
-  <p>
-    <strong>Place:</strong>
+    <strong class="show_cont">場所:</strong>
     <%= @play_ground.place %>
   </p>
 
   <p>
-    <strong>Status:</strong>
+    <strong class="show_cont">使用料:</strong>
+    <% if @play_ground.usage_fee %>
+      <%= @play_ground.usage_fee %>円
+    <% else %>
+      <strong>なし</strong>
+    <% end %>
+  </p>
+
+  <p>
+    <strong class="show_cont">利用可能日:</strong>
+    <%= @play_ground.usage_week ||= "毎日" %>
+  </p>
+
+  <p>
+    <strong class="show_cont">活気:</strong>
     <%= @play_ground.status %>
+  </p>
+
+  <p>
+    <strong class="show_cont">概要:</strong>
+    <%= @play_ground.content %>
   </p>
 </div>

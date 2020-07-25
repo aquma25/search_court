@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_14_083207) do
+ActiveRecord::Schema.define(version: 2020_07_25_071952) do
 
   create_table "play_grounds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "address"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 2020_06_14_083207) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nearest_station"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "usage_fee"
+    t.string "usage_week"
   end
 
 end
