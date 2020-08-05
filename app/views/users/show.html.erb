@@ -10,9 +10,7 @@
   <%= current_user&.territory %><br/>
 </div>
 
-<button class="prof_button">
-  <%= link_to "EditProfile", edit_user_registration_path, id: 'edit_prof' %>
-</button>
+<%= button_to "EditProfile", edit_user_registration_path, method: :get, class: "prof_button" %>
 
 <div id="user_bio">
   自己紹介:
