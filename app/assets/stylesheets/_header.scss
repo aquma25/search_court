@@ -1,0 +1,44 @@
+@media screen and (max-width: 639px) {
+
+  .header {
+    height: 80px;
+    width: 100%;
+    display: inline-block;
+    background-color: #fffafa;
+  }
+
+  #header_img {
+    height:45px;
+    width:95px;
+    margin: 15px 0 0 1px;
+  }
+
+  a:hover {
+    color: indianRed;
+  }
+
+  #logo {
+    float: left;
+    margin: 2px 0 0 2px;
+  }
+
+  ul.header_ul {
+    width: 100%;
+    // border: 1px solid red;
+    font-size: 0px;
+    display: inline-block;
+  }
+
+  ul.header_ul li {
+    width: 23%;
+    // border: 1px solid black;
+    text-align: center;
+    font-size: 14px;
+    float: right;
+  }
+
+  .header_link {
+    margin: 20px 2px 0 0;
+  }
+
+}
