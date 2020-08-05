@@ -1,45 +1,6 @@
 
 /*携帯用のcssを記述*/
 @media screen and (max-width: 639px) {
-  .header {
-    height: 100px;
-    width: 100%;
-    display: inline-block;
-  }
-
-  #header_img {
-    height:45px;
-    width:95px;
-    margin: 15px 0 0 1px;
-  }
-
-  a:hover {
-    color: indianRed;
-  }
-
-  #logo {
-    float: left;
-    margin: 2px 0 0 2px;
-  }
-
-  ul.header_ul {
-    width: 100%;
-    // border: 1px solid red;
-    font-size: 0px;
-    display: inline-block;
-  }
-  
-  ul.header_ul li {
-    width: 23%;
-    // border: 1px solid black;
-    text-align: center;
-    font-size: 14px;
-    float: right;
-  }
-
-  .header_link {
-    margin: 20px 2px 0 0;
-  }
 
   // index
   #court_name {
@@ -141,13 +102,46 @@
     content: none;/*ボタンを押すと線が消える*/
   }
 
-  // show page
+  // show
   .show_rap {
     margin: 5px;
   }
 
   .show_cont {
     margin: 5px;
+  }
+
+  #user_image {
+    width: 40%;
+    float: left;
+  }
+
+  #no_image {
+    height: 120px;
+    width: 120px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 50%; /* 丸くする */
+    margin: 5px;
+  }
+
+  #user_status {
+    width: 40%;
+    padding: 10px;
+    float: right;
+  }
+
+  .prof_button {
+    width: 90%;
+    padding: 4px;
+    margin: 10px;
+    text-align: center;
+  }
+
+  #user_bio {
+    margin: 0 8px;
+    word-wrap: break-word;
   }
 
 }
