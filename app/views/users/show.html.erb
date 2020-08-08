@@ -1,12 +1,21 @@
-<div id="user_image">
-  <%= image_tag (@user_image), id:'no_image', class: "box" %>
+<div id="user_image" onclick="expansion_user_image()">
+  <%= image_tag (@user_image), id:'user_prof_image', class: "box" %>
+</div>
+
+<div id="user_image_modal" class="user_image_modal">
+  <div class="user_image_modal_content">
+    <div class="user_image_modal_body">
+      <div id="modal_close_btn" onclick="modal_close_btn()">✖︎</div>
+      <%= image_tag (@user_image), id:'expansion_user_image' %>
+    </div>
+  </div>
 </div>
 
 <div id="user_status">
-  <div>@<%= current_user&.nick_name %></div>
-  フォロー: 500<br/>
-  フォロワー: 500<br/>
-  ナワバリ:<br/>
+  <div id='user_nick_name'>@<%= current_user&.nick_name %></div>
+  Followers: 500<br/>
+  Following: 400<br/>
+  Territory:<br/>
   <%= current_user&.territory %><br/>
 </div>
 
