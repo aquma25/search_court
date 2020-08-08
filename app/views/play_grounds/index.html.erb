@@ -3,6 +3,10 @@
 <!-- GoogleMap表示 -->
 <div id='map'></div>
 
+<% if User.admin_user?(current_user) %>
+  <%= link_to 'AddNewPlayGround', new_play_ground_path %>
+<% end %>
+
 <% @places&.each.with_index(1) do |court, index| %>
   <article class="card">
     <div class="card__header">
