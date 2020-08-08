@@ -1,5 +1,5 @@
 class PlayGround < ApplicationRecord
-  # relation
+  # DB Relations
   belongs_to :user
 
   # gem "geocoder"
