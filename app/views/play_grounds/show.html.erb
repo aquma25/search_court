@@ -1,6 +1,6 @@
 <div class="show_rap">
 
-  <% if current_user&.id == 1 %>
+  <% if User.admin_user?(current_user) %>
     <%= link_to 'Edit', edit_play_ground_path(@play_ground) %>
   <% end %>
 
