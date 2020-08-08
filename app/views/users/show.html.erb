@@ -1,9 +1,9 @@
 <div id="user_image">
-  <%= image_tag "no_image.png", id:'no_image', class: "box" %>
+  <%= image_tag (@user_image), id:'no_image', class: "box" %>
 </div>
 
 <div id="user_status">
-  <div>@<%= current_user&.user_name %></div>
+  <div>@<%= current_user&.nick_name %></div>
   フォロー: 500<br/>
   フォロワー: 500<br/>
   ナワバリ:<br/>

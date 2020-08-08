@@ -11,12 +11,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_keys = [:name, :user_name, :address, :image, :back_image, :territory, :bio]
+    signup_keys = [:nick_name, :email]
+    update_keys = signup_keys + [:name, :address, :image, :territory, :bio]
 
     # signup時のstrong_parameterを渡す
-    # devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: signup_keys)
 
     # update時のstrong_parameterを渡す
-    devise_parameter_sanitizer.permit(:account_update, keys: devise_keys)
+    devise_parameter_sanitizer.permit(:account_update, keys: update_keys)
   end
 end
