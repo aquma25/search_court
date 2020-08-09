@@ -11,9 +11,9 @@ class PlayGroundsController < ApplicationController
       marker.lng place.longitude
       marker.infowindow render_to_string(partial: "play_grounds/infowindow", locals: { place: place })
     end
-
-    @criteria_marker_json = JSON.dump(markers[0])
     @markers_json = JSON.dump(markers)
+
+    @criteria_marker_json = JSON.dump(user_signed_in? ? PlayGround.get_criteria_latlng(markers[0], current_user) : PlayGround.default_criteria_latlng(markers[0]))
   end
 
   # GET /play_grounds/1

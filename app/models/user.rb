@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   # TODO:loginしているユーザがadmin権限を持っているかどうか(将来的にロジック要変更)
   def self.admin_user?(current_user)
-    current_user.id == 1
+    current_user&.id == 1
   end
 
   # Userのprofile画像を表示

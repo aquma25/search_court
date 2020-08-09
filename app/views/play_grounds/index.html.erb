@@ -45,8 +45,10 @@
   handler.buildMap({ provider: {}, internal: { id: 'map' }}, function(){
     markers = handler.addMarkers(dispMarkers);
     handler.bounds.extendWith(markers);
+    // 登録した住所のマーカー
+    homeMarkers = handler.addMarkers([criteria_marker])
     handler.fitMapToBounds();
     handler.getMap().setCenter(new google.maps.LatLng(criteria_marker.lat, criteria_marker.lng));
-    handler.getMap().setZoom(10);
+    handler.getMap().setZoom(12);
   });
 </script>
