@@ -1,26 +1,19 @@
 
-// profile画像をクリックすると拡大された画像が表示される
-function expansion_user_image(){
-  var userImageModal = document.getElementById('user_image_modal');
+// modal表示・非表示に関しての処理の共通化
+function clickModalEvent(targetModal, changeDispStatus){
+  var Modal = document.getElementById(targetModal);
 
   window.addEventListener('click', function() {
-    userImageModal.style.display = 'block';
+    Modal.style.display = changeDispStatus;
   })
+}
+
+// profile画像をクリックすると拡大された画像が表示される
+function expansionUserImage(){
+  clickModalEvent('user_image_modal', 'block')
 }
 
 // ✖︎ボタン押下でモーダルが消える
-function modal_close_btn(){
-  var userImageModal = document.getElementById('user_image_modal');
-
-  window.addEventListener('click', function() {
-    userImageModal.style.display = 'none';
-  })
+function modalCloseBtn(){
+  clickModalEvent('user_image_modal', 'none')
 }
-
-// 画像の以外の部分をクリックすると消える処理
-window.addEventListener('click', function(e) {
-  var userImageModal = document.getElementById('user_image_modal');
-  if (e.target == userImageModal) {
-    userImageModal.style.display = 'none';
-  }
-});
