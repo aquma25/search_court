@@ -6,54 +6,44 @@
 
   <p>
     <strong class="show_cont">場所名:</strong>
-    <%= @play_ground.court_name %>
+    <%= @court[:name] %>
   </p>
 
   <p>
     <strong class="show_cont">利用可能な時間帯:</strong>
-    <% if @play_ground.end_time %>
-      <%= @start_time %>~<%= @end_time %>
-    <% else %>
-      <strong>時間指定なし</strong>
-    <% end %>
+    <strong><%= @court[:time_zone] %></strong>
   </p>
 
   <p>
     <strong class="show_cont">最寄駅:</strong>
-    <%= @play_ground.nearest_station %>駅
+    <%= @court[:nearest_station] %>
   </p>
 
   <p>
     <strong class="show_cont">住所:</strong>
-    <%= @play_ground.address %>
+    <%= @court[:address] %>
   </p>
 
   <p>
     <strong class="show_cont">場所:</strong>
-    <%= @play_ground.place %>
+    <%= @court[:place] %>
   </p>
 
   <p>
     <strong class="show_cont">使用料:</strong>
-    <% if @play_ground.usage_fee %>
-      <%= @play_ground.usage_fee %>円
-    <% else %>
-      <strong>なし</strong>
-    <% end %>
-  </p>
-
+      <%= @court[:usage_fee] %>
   <p>
     <strong class="show_cont">利用可能日:</strong>
-    <%= @play_ground.usage_week ||= "毎日" %>
+    <%= @court[:usage_week] %>
   </p>
 
   <p>
     <strong class="show_cont">活気:</strong>
-    <%= @play_ground.status %>
+    <%= @court[:status] %>
   </p>
 
   <p>
     <strong class="show_cont">概要:</strong>
-    <%= @play_ground.content %>
+    <%= @court[:content] %>
   </p>
 </div>

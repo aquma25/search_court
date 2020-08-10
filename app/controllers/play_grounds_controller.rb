@@ -13,20 +13,14 @@ class PlayGroundsController < ApplicationController
     end
     @markers_json = JSON.dump(markers)
 
-    criteria_latlng = if user_signed_in? && current_user.address.present?
-                        PlayGround.get_criteria_latlng(markers[0], current_user)
-                      else
-                        PlayGround.default_criteria_latlng(markers[0])
-                      end
-
+    criteria_latlng = user_signed_in? && current_user.address.present? ? PlayGround.get_criteria_latlng(markers[0], current_user) : PlayGround.default_criteria_latlng(markers[0])
     @criteria_marker_json = JSON.dump(criteria_latlng)
   end
 
   # GET /play_grounds/1
   # GET /play_grounds/1.json
   def show
-    @start_time = @play_ground.start_time&.strftime("%H:%M")
-    @end_time = @play_ground.end_time&.strftime("%H:%M")
+    @court = PlayGround.disp_court_infos(@play_ground)
   end
 
   # GET /play_grounds/new
