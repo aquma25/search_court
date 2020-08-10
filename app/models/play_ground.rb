@@ -13,8 +13,6 @@ class PlayGround < ApplicationRecord
 
   # googleMap表示時に基準となる場所の変更
   def self.get_criteria_latlng(marker_info, login_user)
-    return default_criteria_latlng(marker_info) if login_user.address.nil?
-
     _temp_user_address = login_user.address.clone
     del_num = _temp_user_address.gsub!("-", "").match(/[0-9]{1,}/).to_s
     search_address = _temp_user_address.delete(del_num)
