@@ -44,12 +44,12 @@ class PlayGround < ApplicationRecord
 
   # 利用料金が必要かどうか
   def self.usage_fee_of_existence(usage_fee)
-    usage_fee.nil? ? "なし" : usage_fee + "円"
+    usage_fee.nil? ? "なし" : usage_fee.to_s + "円"
   end
 
   # 利用可能な曜日はいつか
   def self.usage_week_of_existence(usage_week)
-    usage_week.nil? ? "毎日" : usage_week
+    usage_week.nil? ? "毎日" : usage_week.to_s
   end
 
   # 表示するコート情報を動的に返す
