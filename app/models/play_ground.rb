@@ -6,9 +6,17 @@ class PlayGround < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
-  # defaultの表示の中心となるマーカー情報
-  def self.default_criteria_latlng(marker_info)
-    { lat: marker_info[:lat], lng: marker_info[:lng] }
+  def self.generate_user_address_marker(latlng, login_user)
+    {
+      lat: latlng[:lat],
+      lng: latlng[:lng],
+      picture: {
+        url: "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png",
+        width:  40,
+        height: 40
+      },
+      infowindow: "@" + login_user.nick_name + "がprofileに登録した住所です"
+    }
   end
 
   # googleMap表示時に基準となる場所の変更
@@ -18,7 +26,9 @@ class PlayGround < ApplicationRecord
     search_address = _temp_user_address.delete(del_num)
 
     place_infos = Geocoder.search(search_address)
-    place_infos.empty? ? default_criteria_latlng(marker_info) : { lat: place_infos[0].data["lat"], lng: place_infos[0].data["lon"] }
+    return marker_info if place_infos.empty?
+    place_latlng = { lat: place_infos[0].data["lat"], lng: place_infos[0].data["lon"] }
+    generate_user_address_marker(place_latlng, login_user)
   end
 
   # 時間と分のみを表示する(ex: "19:00")
@@ -37,10 +47,12 @@ class PlayGround < ApplicationRecord
     usage_fee.nil? ? "なし" : usage_fee + "円"
   end
 
+  # 利用可能な曜日はいつか
   def self.usage_week_of_existence(usage_week)
     usage_week.nil? ? "毎日" : usage_week
   end
 
+  # 表示するコート情報を動的に返す
   def self.disp_court_infos(court_infos)
     {
       name:             court_infos&.court_name,
