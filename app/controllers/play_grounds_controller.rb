@@ -25,6 +25,7 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds/new
   def new
     @play_ground = PlayGround.new
+    @places, @statuses, @weeks = PlayGround.arrays_for_select_form
   end
 
   # GET /play_grounds/1/edit
