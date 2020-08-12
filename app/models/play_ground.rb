@@ -6,6 +6,9 @@ class PlayGround < ApplicationRecord
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
+  # scopes
+  scope :street_court, ->(){ where(place: "ストリートコート") }
+
   def self.generate_user_address_marker(latlng, login_user)
     {
       lat: latlng[:lat],
@@ -21,9 +24,8 @@ class PlayGround < ApplicationRecord
 
   # googleMap表示時に基準となる場所の変更
   def self.get_criteria_latlng(marker_info, login_user)
-    _temp_user_address = login_user.address.clone
-    del_num = _temp_user_address.gsub!("-", "").match(/[0-9]{1,}/).to_s
-    search_address = _temp_user_address.delete(del_num)
+    return marker_info if login_user.prefecture.empty? || login_user.city.empty?
+    search_address = login_user.prefecture + login_user.city
 
     place_infos = Geocoder.search(search_address)
     return marker_info if place_infos.empty?

@@ -13,7 +13,7 @@ class PlayGroundsController < ApplicationController
     end
     @markers_json = JSON.dump(markers)
 
-    @criteria_marker_json = JSON.dump(user_signed_in? && current_user.address.present? ? PlayGround.get_criteria_latlng(markers[0], current_user) : markers[0])
+    @criteria_marker_json = JSON.dump(user_signed_in? && current_user.city.present? ? PlayGround.get_criteria_latlng(markers[0], current_user) : markers[0])
   end
 
   # GET /play_grounds/1
