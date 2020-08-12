@@ -15,9 +15,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @territory_names = User.select_territory_names
+  end
 
   # PUT /resource
   # def update
@@ -43,6 +43,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # user_profile編集後にuser_showページに飛ぶ
   def after_update_path_for(resource)
     user_path(id: current_user.id)
+  end
+
+  # 現在のパスワードを確認せずにをupdateを行う
+  def update_resource(resource, params)
+    resource.update_without_password(params)
   end
 
   # If you have extra params to permit, append them to the sanitizer.

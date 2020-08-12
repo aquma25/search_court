@@ -39,7 +39,12 @@ ActiveRecord::Schema.define(version: 2020_07_25_110843) do
     t.datetime "remember_created_at"
     t.string "name"
     t.string "nick_name", null: false
-    t.string "address"
+    t.string "postcode"
+    t.string "prefecture"
+    t.string "city"
+    t.string "block"
+    t.string "gender"
+    t.string "phone_num"
     t.string "image"
     t.string "territory"
     t.text "bio"
