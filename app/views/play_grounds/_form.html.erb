@@ -38,13 +38,28 @@
 
   <div class="field">
     <%= form.label :place %>
-    <%= form.text_field :place %>
+    <%= form.select :place, @places, autocomplete: "place" %>
   </div>
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status, @statuses, autocomplete: "status" %>
   </div>
+
+  <!--<div class="field">
+    コート画像１<br/>
+    <%= form.file_field :image_first, autocomplete: "image_first" %>
+  </div>
+
+  <div class="field">
+    コート画像２<br/>
+    <%= form.file_field :image_second, autocomplete: "image_second" %>
+  </div>
+
+  <div class="field">
+    コート画像３<br/>
+    <%= form.file_field :image_third, autocomplete: "image_third" %>
+  </div>-->
 
   <div class="field">
     <%= form.label :release %>
@@ -52,8 +67,31 @@
   </div>
 
   <div class="field">
-    <%= form.label :user_id %>
-    <%= form.number_field :user_id %>
+    <%= form.label :nearest_station %>
+    <%= form.text_field :nearest_station %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.time_field :start_time, {} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.time_field :end_time, {} %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usage_fee %>
+    <%= form.number_field :usage_fee %>
+  </div>
+
+  <div class="field">
+    <%= form.label :usage_week %>
+    <% @weeks.each do | week | %>
+      <%= form.check_box :usage_week, { multiple: true }, week, nil %>
+      <%= form.label :usage_week, week %>
+    <% end %>
   </div>
 
   <div class="actions">

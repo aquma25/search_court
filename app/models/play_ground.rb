@@ -9,63 +9,83 @@ class PlayGround < ApplicationRecord
   # scopes
   scope :street_court, ->(){ where(place: "ストリートコート") }
 
-  def self.generate_user_address_marker(latlng, login_user)
-    {
-      lat: latlng[:lat],
-      lng: latlng[:lng],
-      picture: {
-        url: "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png",
-        width:  40,
-        height: 40
-      },
-      infowindow: "@" + login_user.nick_name + "がprofileに登録した住所です"
-    }
-  end
+  # static method
+  class << self
+    def generate_user_address_marker(latlng, login_user)
+      {
+        lat: latlng[:lat],
+        lng: latlng[:lng],
+        picture: {
+          url: "http://mt.google.com/vt/icon?color=ff004C13&name=icons/spotlight/spotlight-waypoint-blue.png",
+          width:  40,
+          height: 40
+        },
+        infowindow: "@" + login_user.nick_name + "がprofileに登録した住所です"
+      }
+    end
 
-  # googleMap表示時に基準となる場所の変更
-  def self.get_criteria_latlng(marker_info, login_user)
-    return marker_info if login_user.prefecture.empty? || login_user.city.empty?
-    search_address = login_user.prefecture + login_user.city
+    # googleMap表示時に基準となる場所の変更
+    def get_criteria_latlng(marker_info, login_user)
+      return marker_info if login_user.prefecture.empty? || login_user.city.empty?
+      search_address = login_user.prefecture + login_user.city
 
-    place_infos = Geocoder.search(search_address)
-    return marker_info if place_infos.empty?
-    place_latlng = { lat: place_infos[0].data["lat"], lng: place_infos[0].data["lon"] }
-    generate_user_address_marker(place_latlng, login_user)
-  end
+      place_infos = Geocoder.search(search_address)
+      return marker_info if place_infos.empty?
+      place_latlng = { lat: place_infos[0].data["lat"], lng: place_infos[0].data["lon"] }
+      generate_user_address_marker(place_latlng, login_user)
+    end
 
-  # 時間と分のみを表示する(ex: "19:00")
-  def self.hm_time_format(time)
-    time.strftime("%H:%M")
-  end
+    # 時間と分のみを表示する(ex: "19:00")
+    def hm_time_format(time)
+      time.strftime("%H:%M")
+    end
 
-  # 利用可能時間帯を表示する
-  def self.utilization_time(start_time, end_time)
-    return "時間指定なし" if start_time.nil? || end_time.nil?
-    hm_time_format(start_time) + " ~ " + hm_time_format(end_time)
-  end
+    # 利用可能時間帯を表示する
+    def utilization_time(start_time, end_time)
+      return "時間指定なし" if start_time.nil? || end_time.nil?
+      hm_time_format(start_time) + " ~ " + hm_time_format(end_time)
+    end
 
-  # 利用料金が必要かどうか
-  def self.usage_fee_of_existence(usage_fee)
-    usage_fee.nil? ? "なし" : usage_fee.to_s + "円"
-  end
+    # 利用料金が必要かどうか
+    def usage_fee_of_existence(usage_fee)
+      usage_fee.nil? ? "なし" : usage_fee.to_s + "円"
+    end
 
-  # 利用可能な曜日はいつか
-  def self.usage_week_of_existence(usage_week)
-    usage_week.nil? ? "毎日" : usage_week.to_s
-  end
+    # 利用可能な曜日はいつか
+    def usage_week_of_existence(usage_week)
+      usage_week.nil? ? ["毎日"] : JSON.parse(usage_week)
+    end
 
-  # 表示するコート情報を動的に返す
-  def self.disp_court_infos(court_infos)
-    {
-      name:             court_infos&.court_name,
-      time_zone:        utilization_time(court_infos&.start_time, court_infos&.end_time),
-      nearest_station:  court_infos&.nearest_station + "駅",
-      address:          court_infos&.address,
-      place:            court_infos&.place,
-      usage_fee:        usage_fee_of_existence(court_infos&.usage_fee),
-      usage_week:       usage_week_of_existence(court_infos&.usage_week),
-      status:           court_infos&.status,
-      content:          court_infos&.content
-    }
+    # 表示するコート情報を動的に返す
+    def disp_court_infos(court_infos)
+      {
+        name:             court_infos&.court_name,
+        time_zone:        utilization_time(court_infos&.start_time, court_infos&.end_time),
+        nearest_station:  court_infos&.nearest_station + "駅",
+        address:          court_infos&.address,
+        place:            court_infos&.place,
+        usage_fee:        usage_fee_of_existence(court_infos&.usage_fee),
+        usage_week:       usage_week_of_existence(court_infos&.usage_week),
+        status:           court_infos&.status,
+        content:          court_infos&.content
+      }
+    end
+
+    # select_formで使用するためにデータ構造を変える
+    def arrays_for_select_form
+      place_array = ["ストリートコート", "体育館"]
+      status_array = ["活発", "普通"]
+      weeks = ["月曜", "火曜", "水曜", "木曜", "金曜", "土曜", "日曜"]
+
+      places = convert_status_for_form(place_array)
+      statuses = convert_status_for_form(status_array)
+
+      [places, statuses, weeks]
+    end
+
+    # select_formで使用するためにデータ構造を変える
+    def convert_status_for_form(array)
+      array.map do | ele |[ele, ele] end
+    end
   end
 end
