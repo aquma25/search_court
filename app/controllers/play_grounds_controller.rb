@@ -29,6 +29,7 @@ class PlayGroundsController < ApplicationController
 
   # GET /play_grounds/1/edit
   def edit
+    @places, @statuses, @weeks = PlayGround.arrays_for_select_form
   end
 
   # POST /play_grounds
@@ -79,7 +80,24 @@ class PlayGroundsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def play_ground_params
-      req_params = params.require(:play_ground).permit(:address, :latitude, :longitude, :court_name, :content, :place, :status, :release)
+
+      params_array = [
+        :address,
+        :latitude,
+        :longitude,
+        :court_name,
+        :content,
+        :place,
+        :status,
+        :release,
+        :nearest_station,
+        :start_time,
+        :end_time,
+        :usage_fee,
+        :usage_week => []
+      ]
+
+      req_params = params.require(:play_ground).permit(params_array)
       req_params.merge(user_id: current_user.id) if current_user.present?
     end
 end

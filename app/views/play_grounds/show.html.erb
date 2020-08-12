@@ -34,7 +34,9 @@
       <%= @court[:usage_fee] %>
   <p>
     <strong class="show_cont">利用可能日:</strong>
-    <%= @court[:usage_week] %>
+    <% @court[:usage_week].each do | week | %>
+      <%= week %>
+    <% end %>
   </p>
 
   <p>
