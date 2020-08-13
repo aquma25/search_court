@@ -3,7 +3,7 @@ class Image < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   # scopes
-  scope :get_same_id_records, ->(snake_class_name_id, id){ where(snake_class_name_id, id) }
+  scope :get_same_id_records, ->(snake_class_name_key, class_name_id){ where(snake_class_name_key + " = ?", class_name_id) }
 
   # static method
   class << self
@@ -22,7 +22,7 @@ class Image < ApplicationRecord
       image_array.compact
 
       camel_image_class_name.transaction do
-        camel_image_class_name.get_same_id_records(snake_class_name_id + " = ?", id).delete_all
+        camel_image_class_name.get_same_id_records(snake_class_name_id, id).delete_all
         image_array.each do |image|
           type_hash = { image: image }
           type_hash.store(snake_class_name_id.to_sym, id)

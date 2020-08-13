@@ -40,7 +40,7 @@ class PlayGroundsController < ApplicationController
 
     respond_to do |format|
       if @play_ground.save
-        formtimeat.html { redirect_to @play_ground, notice: 'Play ground was successfully created.' }
+        format.html { redirect_to @play_ground, notice: 'Play ground was successfully created.' }
         format.json { render :show, status: :created, location: @play_ground }
       else
         format.html { render :new }

@@ -46,6 +46,7 @@
     <%= form.select :status, @statuses, autocomplete: "status" %>
   </div>
 
+  <% unless action_name == "new" %>
   <div class="field">
     コート画像１<br/>
     <%= form.file_field :image_first, autocomplete: "image_first" %>
@@ -60,6 +61,7 @@
     コート画像３<br/>
     <%= form.file_field :image_third, autocomplete: "image_third" %>
   </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :release %>
