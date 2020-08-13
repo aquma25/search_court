@@ -10,7 +10,7 @@ class Image < ApplicationRecord
 
     # Imagesテーブルに紐づいているモデルの画像をSTIを使用し一括管理する
     def save_format(id, params_hash, controller_name)
-      snake_class_name = controller_name.singularize # ex: "play_ground
+      snake_class_name = controller_name.singularize # ex: "play_ground"
       snake_class_name_id = snake_class_name + "_id" # ex: "play_ground_id"
       camel_class_name = snake_class_name.camelize + "Image"  # "ex: PlayGroundImage"
       camel_image_class_name = camel_class_name.constantize # ex: "PlayGroundImage"を文字列からクラス名へ
@@ -22,7 +22,7 @@ class Image < ApplicationRecord
       image_array.compact
 
       camel_image_class_name.transaction do
-        camel_image_class_name.get_same_id_records(snake_class_name_id, id).delete_all
+        camel_image_class_name.get_same_id_records(snake_class_name_id + " = ?", id).delete_all
         image_array.each do |image|
           type_hash = { image: image }
           type_hash.store(snake_class_name_id.to_sym, id)
