@@ -1,13 +1,14 @@
 class PlayGround < ApplicationRecord
   # DB Relations
   belongs_to :user
+  # has_many :images, dependent: :destroy
 
   # gem "geocoder"
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
 
   # scopes
-  scope :street_court, ->(){ where(place: "ストリートコート") }
+  scope :street_courts, ->(){ where(place: "ストリートコート") }
 
   # static method
   class << self
@@ -77,14 +78,11 @@ class PlayGround < ApplicationRecord
       status_array = ["活発", "普通"]
       weeks = ["月曜", "火曜", "水曜", "木曜", "金曜", "土曜", "日曜"]
 
-      places = convert_status_for_form(place_array)
-      statuses = convert_status_for_form(status_array)
-
-      [places, statuses, weeks]
+      [convert_array_for_select_form(place_array), convert_array_for_select_form(status_array), weeks]
     end
 
     # select_formで使用するためにデータ構造を変える
-    def convert_status_for_form(array)
+    def convert_array_for_select_form(array)
       array.map do | ele |[ele, ele] end
     end
   end
