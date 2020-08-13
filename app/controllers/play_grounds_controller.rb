@@ -1,5 +1,6 @@
 class PlayGroundsController < ApplicationController
   before_action :set_play_ground, only: [:show, :edit, :update, :destroy]
+  before_action :set_array_for_select_form, only: [:new, :edit, :update]
 
   # GET /play_grounds
   # GET /play_grounds.json
@@ -25,12 +26,10 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds/new
   def new
     @play_ground = PlayGround.new
-    @places, @statuses, @weeks = PlayGround.arrays_for_select_form
   end
 
   # GET /play_grounds/1/edit
   def edit
-    @places, @statuses, @weeks = PlayGround.arrays_for_select_form
   end
 
   # POST /play_grounds
@@ -79,6 +78,11 @@ class PlayGroundsController < ApplicationController
       @play_ground = PlayGround.find(params[:id])
     end
 
+    # select_formで使用する配列
+    def set_array_for_select_form
+      @places, @statuses, @weeks = PlayGround.arrays_for_select_form
+    end
+
     # Only allow a list of trusted parameters through.
     def play_ground_params
 
@@ -90,6 +94,9 @@ class PlayGroundsController < ApplicationController
         :content,
         :place,
         :status,
+        # :image_first,
+        # :image_second,
+        # :image_third,
         :release,
         :nearest_station,
         :start_time,

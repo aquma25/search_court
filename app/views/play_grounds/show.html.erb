@@ -1,7 +1,8 @@
 <div class="show_rap">
 
   <% if User.admin_user?(current_user) %>
-    <%= link_to 'Edit', edit_play_ground_path(@play_ground) %>
+    <%= link_to '編集する', edit_play_ground_path(@play_ground) %> |
+    <%= link_to '削除する', play_ground_path(@play_ground), method: :delete, data: { confirm: 'このコート情報を削除しますか？' } %>
   <% end %>
 
   <p>

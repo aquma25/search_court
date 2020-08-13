@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
     # ストリートコートの名前のみ取得し整形する
     def select_territory_names
-      street_court_names = PlayGround.street_court.map(&:court_name)
+      street_court_names = PlayGround.street_courts.map(&:court_name)
       street_court_names.map do | court_name |
         [court_name, court_name]
       end
