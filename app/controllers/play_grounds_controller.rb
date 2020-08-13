@@ -21,6 +21,7 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds/1.json
   def show
     @court = PlayGround.disp_court_infos(@play_ground)
+    @court_images = PlayGroundImage.get_images(@play_ground.id)
   end
 
   # GET /play_grounds/new
@@ -51,8 +52,9 @@ class PlayGroundsController < ApplicationController
   # PATCH/PUT /play_grounds/1
   # PATCH/PUT /play_grounds/1.json
   def update
+    court_params = PlayGroundImage.save_format(@play_ground.id, play_ground_params.to_h, controller_name)
     respond_to do |format|
-      if @play_ground.update(play_ground_params)
+      if @play_ground.update(court_params)
         format.html { redirect_to @play_ground, notice: 'Play ground was successfully updated.' }
         format.json { render :show, status: :ok, location: @play_ground }
       else
@@ -85,7 +87,6 @@ class PlayGroundsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def play_ground_params
-
       params_array = [
         :address,
         :latitude,
@@ -94,9 +95,9 @@ class PlayGroundsController < ApplicationController
         :content,
         :place,
         :status,
-        # :image_first,
-        # :image_second,
-        # :image_third,
+        :image_first,
+        :image_second,
+        :image_third,
         :release,
         :nearest_station,
         :start_time,
