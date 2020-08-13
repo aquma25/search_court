@@ -1,7 +1,7 @@
 class PlayGround < ApplicationRecord
   # DB Relations
   belongs_to :user
-  # has_many :images, dependent: :destroy
+  has_many :images, dependent: :destroy
 
   # gem "geocoder"
   geocoded_by :address

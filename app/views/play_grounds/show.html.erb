@@ -49,4 +49,7 @@
     <strong class="show_cont">概要:</strong>
     <%= @court[:content] %>
   </p>
+  <% @court_images.each do | image | %>
+    <%= image_tag(image.url) %>
+  <% end %>
 </div>
