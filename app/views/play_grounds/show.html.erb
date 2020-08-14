@@ -5,6 +5,22 @@
     <%= link_to '削除する', play_ground_path(@play_ground), method: :delete, data: { confirm: 'このコート情報を削除しますか？' } %>
   <% end %>
 
+  <% if @court_images.present? %>
+    <!-- Court Image Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <% @court_images.each do | image | %>
+          <%= image_tag(image.url, class:"swiper-slide court_image") %>
+        <% end %>
+      </div>
+      <% if @court_images.length != 1 %>
+        <div class="swiper-pagination"></div>
+      <% end %>
+    </div>
+  <% else %>
+    <%= image_tag 'no_image_court.png', class:"court_image" %>
+  <% end %>
+
   <p>
     <strong class="show_cont">場所名:</strong>
     <%= @court[:name] %>
@@ -49,7 +65,15 @@
     <strong class="show_cont">概要:</strong>
     <%= @court[:content] %>
   </p>
-  <% @court_images.each do | image | %>
-    <%= image_tag(image.url) %>
-  <% end %>
 </div>
+
+<!-- Swiper JS -->
+<script type="text/javascript">
+  var mySwiper = new Swiper('.swiper-container', {
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    }
+  });
+</script>
