@@ -13,6 +13,8 @@
           <%= image_tag(image.url, class:"swiper-slide court_image") %>
         <% end %>
       </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
       <% if @court_images.length != 1 %>
         <div class="swiper-pagination"></div>
       <% end %>
@@ -70,6 +72,11 @@
 <!-- Swiper JS -->
 <script type="text/javascript">
   var mySwiper = new Swiper('.swiper-container', {
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
     pagination: {
       el: '.swiper-pagination',
       type: 'bullets',

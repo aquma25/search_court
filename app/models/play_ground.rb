@@ -21,7 +21,7 @@ class PlayGround < ApplicationRecord
           width:  40,
           height: 40
         },
-        infowindow: "@" + login_user.nick_name + "がprofileに登録した住所です"
+        infowindow: "@" + login_user.nick_name + "がprofileに登録した住所です（このピンは自身にしか表示されません）"
       }
     end
 
