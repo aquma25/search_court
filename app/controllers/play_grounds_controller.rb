@@ -21,6 +21,7 @@ class PlayGroundsController < ApplicationController
   # GET /play_grounds/1.json
   def show
     @court = PlayGround.disp_court_infos(@play_ground)
+    @territory_users = User.nick_names_own_a_court(@play_ground.court_name)
     @court_images = PlayGroundImage.get_images(@play_ground.id)
   end
 

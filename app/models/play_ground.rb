@@ -1,6 +1,7 @@
 class PlayGround < ApplicationRecord
   # DB Relations
-  belongs_to :user
+  has_many :court_members
+  has_many :users, through: :court_members
   has_many :images, dependent: :destroy
 
   # gem "geocoder"

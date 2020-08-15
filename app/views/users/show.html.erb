@@ -1,27 +1,29 @@
-<div id="user_image" onclick="expansionUserImage()">
-  <%= image_tag (@user_image), id:'user_prof_image', class: "box" %>
-</div>
-
-<div id="user_image_modal" class="user_image_modal">
-  <div class="user_image_modal_content">
-    <div class="user_image_modal_body">
-      <div id="modal_close_btn" onclick="modalCloseBtn()">✖︎</div>
-      <%= image_tag (@user_image), id:'expansion_user_image' %>
+<div id="user_header">
+  <div id="user_image" onclick="expansionUserImage()">
+    <%= image_tag (@user_image), id:'user_prof_image', class: "box" %>
+  </div>
+  <div id="user_image_modal" class="user_image_modal">
+    <div class="user_image_modal_content">
+      <div class="user_image_modal_body">
+        <div id="modal_close_btn" onclick="modalCloseBtn()">✖︎</div>
+        <%= image_tag (@user_image), id:'expansion_user_image' %>
+      </div>
     </div>
+  </div>
+  <div id="user_status">
+    <div id='user_nick_name'>@<%= @user&.nick_name %></div>
+    Followers: 500<br/>
+    Following: 400<br/>
+    Territory:<br/>
+    <%= @user&.territory %><br/>
   </div>
 </div>
 
-<div id="user_status">
-  <div id='user_nick_name'>@<%= current_user&.nick_name %></div>
-  Followers: 500<br/>
-  Following: 400<br/>
-  Territory:<br/>
-  <%= current_user&.territory %><br/>
-</div>
-
-<%= button_to "EditProfile", edit_user_registration_path, method: :get, class: "prof_button" %>
+<% if current_user.id == @user.id %>
+  <%= button_to "EditProfile", edit_user_registration_path, method: :get, class: "prof_button" %>
+<% end %>
 
 <div id="user_bio">
   自己紹介:
-  <%= current_user&.bio %>
+  <%= @user&.bio %>
 </div>

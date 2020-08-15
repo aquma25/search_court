@@ -5,10 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # DB Relations
-  has_many :play_grounds
+  has_many :court_members, dependent: :destroy
+  has_many :play_grounds, through: :court_members
 
   # carrierwave
   mount_uploader :image, ImageUploader
+
+  # scopes
+  scope :nick_names_own_a_court, ->(court_name){ where('territory = ?', court_name) }
 
   # static method
   class << self

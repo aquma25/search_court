@@ -1,64 +1,73 @@
-  #user_image {
-    width: 40%;
-    float: left;
-  }
+#user_header {
+  height: 135px;
+  width: 90%;
+  padding: 4px;
+  margin: 10px;
+}
 
-  #user_prof_image {
-    height: 120px;
-    width: 120px;
-    border-width: 3px;
-    border-style: solid;
-    border-color: black;
-    border-radius: 50%; /* 丸くする */
-    margin: 5px;
-  }
+#user_image {
+  width: 40%;
+  float: left;
+}
 
-  .user_image_modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
-  }
+#user_prof_image {
+  height: 120px;
+  width: 120px;
+  border-width: 3px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 50%; /* 丸くする */
+  margin: 5px;
+}
 
-  .user_image_modal_content {
-    background-color: white;
-    width: 500px;
-    margin: 40% auto;
-  }
+.user_image_modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
 
-  #expansion_user_image {
-    height: 60%;
-    width: 60%;
-  }
+.user_image_modal_content {
+  background-color: white;
+  width: 500px;
+  margin: 40% auto;
+}
 
-  #modal_close_btn {
-    padding: 10px;
-  }
+#expansion_user_image {
+  height: 60%;
+  width: 60%;
+}
 
-  #user_status {
-    width: 40%;
-    padding: 10px;
-    float: right;
-  }
+#modal_close_btn {
+  padding: 10px;
+}
 
-  .prof_button {
-    width: 90%;
-    padding: 4px;
-    margin: 10px;
-    text-align: center;
-  }
+#user_status {
+  width: 40%;
+  padding: 10px;
+  float: right;
+}
 
-  #user_bio {
-    margin: 0 8px;
-    word-wrap: break-word;
-  }
+.prof_button {
+  width: 90%;
+  padding: 4px;
+  margin: 3px 10px;
+  text-align: center;
+}
 
-  #user_nick_name {
+#user_bio {
+  margin: 0 8px;
+  width: 90%;
+  padding: 4px;
+  word-wrap: break-word;
+}
+
+#user_nick_name {
   font-family: -apple-system, BlinkMacSystemFont,
   "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
   font-size: 16px;

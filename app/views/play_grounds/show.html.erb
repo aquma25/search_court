@@ -63,6 +63,17 @@
     <strong class="show_cont">概要:</strong>
     <%= @court[:content] %>
   </p>
+
+  <p>
+    <strong class="show_cont">ナワバリ登録しているプレイヤー:</strong><br/>
+    <% if @territory_users.empty? %>
+      登録者なし
+    <% else %>
+      <% @territory_users.each do | user | %>
+        ・<%= link_to user.nick_name, user_path(user) %><br/>
+      <% end %>
+    <% end %>
+  </p>
 </div>
 
 <!-- Swiper JS -->
