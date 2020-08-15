@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @user_image = User.disp_prof_image(current_user.image)
+    @user_image = User.disp_prof_image(@user.image)
   end
 
   private
