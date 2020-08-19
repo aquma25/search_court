@@ -76,8 +76,22 @@
   </p>
 </div>
 
+<input type="button" value="今いるボタン" onclick="AddPlayingMember(<%= JSON.dump(@play_ground.id) %>);" class="attendance_button">
+
+<p>今いるプレイヤー</p>
+<% unless @play_ground.users.empty? %>
+  <% @play_ground.users.each do |user| %>
+    ・@<%= link_to user.nick_name, user_path(user) %>(<%= user.start_play_time.strftime("%Y/%-m/%-d %-H:%-M") %>~)<br/>
+  <% end %>
+<% else %>
+  現在プレイヤーはいません
+<% end %>
+
+<%= button_to "もう帰るボタン", play_grounds_go_home_users_path, params: { id: @play_ground.id }, data: { confirm: "本当にもう帰りますか？" }, class: "attendance_button"  %>
+
 <!-- Swiper JS -->
 <script type="text/javascript">
+
   var mySwiper = new Swiper('.swiper-container', {
     loop: true,
     pagination: {
@@ -86,4 +100,5 @@
       clickable: true
     }
   });
+
 </script>

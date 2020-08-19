@@ -84,7 +84,20 @@ class PlayGround < ApplicationRecord
 
     # select_formで使用するためにデータ構造を変える
     def convert_array_for_select_form(array)
-      array.map do | ele |[ele, ele] end
+      array.map do | ele | [ele, ele] end
+    end
+
+    # 今いるボタン押下後に他のコートですでに登録していないかを調べる
+    def already_other_court_playing(nick_name)
+      booleans = []
+      already_playing_court_name = []
+
+      PlayGround.all.to_a.each do |pl|
+        already_playing_court_name << pl.court_name if pl.users.map(&:nick_name).include?(nick_name)
+        booleans << pl.users.map(&:nick_name).include?(nick_name)
+      end
+
+      [booleans.any?, already_playing_court_name[0]]
     end
   end
 end
