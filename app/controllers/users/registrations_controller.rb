@@ -17,6 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   def edit
     @territory_names = User.select_territory_names
+    @prefecture_names = User.select_prefecture_names
   end
 
   # PUT /resource

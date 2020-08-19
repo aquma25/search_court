@@ -22,18 +22,18 @@
 
   <div class="field">
     都道府県<br/>
-    ※ここを基準として地図を表示します
-    <%= f.text_field :prefecture, autocomplete: "prefecture" %>
+    ※ここを基準として地図を表示します<br/>
+    <%= f.select :prefecture, @prefecture_names, autocomplete: "prefecture" %>
   </div>
 
   <div class="field">
-    市区町村<br/>
-    ※ここを基準として地図を表示します
+    市区町村(ex: 世田谷区三軒茶屋)<br/>
+    ※ここを基準として地図を表示します<br/>
     <%= f.text_field :city, autocomplete: "city" %>
   </div>
 
   <div class="field">
-    番地・建物名・部屋番号<br/>
+    番地・建物名・部屋番号(ex: 4-26-22-301)<br/>
     <%= f.text_field :block, autocomplete: "block" %>
   </div>
 
