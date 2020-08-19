@@ -1,5 +1,5 @@
 class PlayGroundsController < ApplicationController
-  before_action :set_play_ground, only: [:show, :edit, :update, :destroy]
+  before_action :set_play_ground, only: [:show, :edit, :update, :destroy, :go_home_users]
   before_action :set_array_for_select_form, only: [:new, :edit, :update]
 
   # GET /play_grounds
@@ -73,6 +73,29 @@ class PlayGroundsController < ApplicationController
       format.html { redirect_to play_grounds_url, notice: 'Play ground was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def playing_users
+    play_ground_id = params["court_id"].to_i
+    play_ground_users = PlayGround.find(play_ground_id).users
+
+    begin
+      render json: { wording: "ログイン後使用できます" } and return unless user_signed_in?
+      render json: { wording: "すでに登録済みです" } and return if play_ground_users.include?(current_user)
+      already_other_court_playing, already_playing_court_name = PlayGround.already_other_court_playing(current_user.nick_name)
+      render json: { wording: "#{already_playing_court_name}に今いるプレイヤーとして登録済みです" } and return if already_other_court_playing
+
+      play_ground_users << current_user unless play_ground_users.include?(current_user)
+      current_user.update(start_play_time: DateTime.now)
+      render json: {}
+    rescue => e
+      render json: { wording: e, status: 404 }
+    end
+  end
+
+  def go_home_users
+    @play_ground.users.delete(current_user) if @play_ground.users.include?(current_user)
+    redirect_to @play_ground
   end
 
   private

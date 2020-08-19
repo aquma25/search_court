@@ -35,3 +35,32 @@ function openCommentInMarker(comment, myMarker) {
     });
   });
 }
+
+// 現在いるプレイヤー欄に
+function AddPlayingMember(court_id){
+  if(!confirm("今いるプレイヤーとしてニックネームを登録しますか？")){
+    return;
+  }
+
+  onSuccess = function(data) {
+    if (data.wording){
+      alert(data.wording)
+    } else {
+      window.location.reload();
+    }
+  };
+  onError = function(data){
+    if (data.status == 404){
+      alert(e)
+    }
+  };
+
+  $.ajax({
+    type: "POST",
+    url: url + "/play_grounds/playing_users",
+    data: {
+      authenticity_token: $("head meta[name=csrf-token]").attr("content"),
+      court_id: court_id
+    }
+  }).then(onSuccess, onError)
+};
