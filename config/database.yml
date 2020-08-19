@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: search_court_production
-  username: search_court
-  password: <%= ENV['SEARCH_COURT_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
