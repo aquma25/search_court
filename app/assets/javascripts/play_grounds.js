@@ -1,5 +1,5 @@
 // ex) http://localhost:3000
-const url = location.protocol + '//' +  location.hostname + ':' +  location.port
+var url = location.protocol + '//' +  location.hostname + ':' +  location.port
 
 // ShowMapボタン押下でMap上に該当プレイグラウンドのマーカーを追加していく
 function dispMarker(lat, lng, id, indx_num, inout) {
