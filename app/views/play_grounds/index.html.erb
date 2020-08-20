@@ -18,9 +18,9 @@
 
       <div>
         <% if court.images[0].nil? %>
-          <%= image_tag("no_image_court.png", class:"index_court_image") %>
+          <%= link_to image_tag("no_image_court.png", class:"index_court_image"), play_ground_path(court.id) %>
         <%else%>
-          <%= image_tag(court.images[0].image.thumb.url, class:"index_court_image") %>
+          <%= link_to image_tag(court.images[0].image.thumb.url, class:"index_court_image"), play_ground_path(court.id) %>
         <% end %>
       </div>
 
