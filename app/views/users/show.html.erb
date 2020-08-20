@@ -15,11 +15,11 @@
     <!-- Followers: 500<br/>
     Following: 400<br/>-->
     Territory:<br/>
-    <%= @user&.territory %><br/>
+    <%= @user&.territory ||= "登録なし" %><br/>
   </div>
 </div>
 
-<% if current_user.id == @user.id %>
+<% if current_user&.id == @user&.id %>
   <%= button_to "EditProfile", edit_user_registration_path, method: :get, class: "prof_button" %>
 <% end %>
 

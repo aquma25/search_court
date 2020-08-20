@@ -13,8 +13,16 @@
       <h3 class="card__title"><%= court.court_name %></h3>
     </div>
     <div class="card__body">
-      <p class="card__text">content: <%= court.content %></p>
+      <p class="card__text"><%= court.content %></p>
       <input id="street_court_<%= index %>" type="hidden" value="<%= court.court_name %>"><br/>
+
+      <div>
+        <% if court.images[0].nil? %>
+          <%= image_tag("no_image_court.png", class:"index_court_image") %>
+        <%else%>
+          <%= image_tag(court.images[0].image.thumb.url, class:"index_court_image") %>
+        <% end %>
+      </div>
 
       <!-- buttonをクリックしたらdisp_markerを実行　-->
       <input type="button" value="ShowMap" class="btn-square-slant"
