@@ -102,6 +102,16 @@
     content: none;/*ボタンを押すと線が消える*/
   }
 
+  .index_court_image {
+    height:90px;
+    width:125px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ddd;
+    border-radius: 5%;
+    float: right;
+  }
+
   // show
   .show_rap {
     margin: 5px;
