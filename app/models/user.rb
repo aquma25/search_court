@@ -26,10 +26,6 @@ class User < ApplicationRecord
       user_image.present? ? user_image.url : "no_image.png"
     end
 
-    def convert_for_selecet_form(array)
-      array.map do | ele | [ele, ele] end
-    end
-
     # 県庁所在地のみ取得し整形する
     def select_prefecture_names
       prefecture_names = [
@@ -41,12 +37,13 @@ class User < ApplicationRecord
         "徳島県", "香川県", "愛媛県", "高知県",
         "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"
       ]
-      convert_for_selecet_form(prefecture_names)
+      prefecture_names.zip(prefecture_names)
     end
 
     # ストリートコートの名前のみ取得し整形する
     def select_territory_names
-      convert_for_selecet_form(PlayGround.street_courts.map(&:court_name))
+      court_names = PlayGround.street_courts.map(&:court_name)
+      court_names.zip(court_names)
     end
   end
 end

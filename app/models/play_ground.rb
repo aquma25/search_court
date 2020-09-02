@@ -79,12 +79,7 @@ class PlayGround < ApplicationRecord
       status_array = ["活発", "普通"]
       weeks = ["月曜", "火曜", "水曜", "木曜", "金曜", "土曜", "日曜"]
 
-      [convert_array_for_select_form(place_array), convert_array_for_select_form(status_array), weeks]
-    end
-
-    # select_formで使用するためにデータ構造を変える
-    def convert_array_for_select_form(array)
-      array.map do | ele | [ele, ele] end
+      [place_array.zip(place_array), status_array.zip(status_array), weeks]
     end
 
     # 今いるボタン押下後に他のコートですでに登録していないかを調べる
