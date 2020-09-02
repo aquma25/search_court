@@ -10,9 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   def edit
@@ -21,9 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    @territory_names = User.select_territory_names
+    @prefecture_names = User.select_prefecture_names
+    super
+  end
 
   # DELETE /resource
   # def destroy
@@ -39,6 +41,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def mail_sent
+  end
+
   protected
 
   # user_profile編集後にuser_showページに飛ぶ
@@ -47,9 +52,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # 現在のパスワードを確認せずにをupdateを行う
-  def update_resource(resource, params)
-    resource.update_without_password(params)
-  end
+  # def update_resource(resource, params)
+  #   resource.update_without_password(params)
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -67,7 +72,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    users_mail_sent_path
+  end
 end

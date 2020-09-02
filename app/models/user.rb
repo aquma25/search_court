@@ -1,12 +1,17 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   # DB Relations
   has_many :court_members, dependent: :destroy
   has_many :play_grounds, through: :court_members
+
+  # Validation
+  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+  validates :nick_name, presence: true, length: { maximum: 8 }, format: { with: VALID_PASSWORD_REGEX }
+  validates :password, format: { with: VALID_PASSWORD_REGEX }
 
   # carrierwave
   mount_uploader :image, ImageUploader
