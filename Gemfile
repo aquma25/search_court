@@ -84,7 +84,11 @@ gem "jquery-rails"
 gem 'geocoder'
 gem 'gmaps4rails'
 
+# login機能
 gem 'devise'
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'http'
