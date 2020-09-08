@@ -7,3 +7,4 @@ in the "application" pack.
 To reference this file, add <%= stylesheet_pack_tag 'application' %> to the appropriate
 layout file, like app/views/layouts/application.html.erb
 */
+@import 'bootstrap/dist/css/bootstrap'
