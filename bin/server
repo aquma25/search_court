@@ -1,0 +1,2 @@
+bundle
+foreman start -f Procfile.dev
