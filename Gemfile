@@ -44,6 +44,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem "pry-byebug"
   gem "rspec"
+  # rails sとwebpack-dev-serverを同時に起動する
+  gem 'foreman'
 end
 
 group :test do

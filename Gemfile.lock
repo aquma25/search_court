@@ -131,6 +131,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    foreman (0.87.2)
     geocoder (1.6.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -328,6 +329,7 @@ DEPENDENCIES
   devise-i18n
   devise-i18n-views
   dotenv-rails
+  foreman
   geocoder
   gmaps4rails
   http
