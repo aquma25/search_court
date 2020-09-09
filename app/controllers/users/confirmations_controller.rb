@@ -12,9 +12,12 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  # 確認メールの完了手続きを押下したらログイン後のページにリダイレクトする
+  def show
+    super do |resource|
+      sign_in(resource)
+    end
+  end
 
   # protected
 
