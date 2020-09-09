@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :play_grounds, through: :court_members
 
   # Validation
-  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
+  VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i # 半角英数字のみ
   validates :nick_name, presence: true, length: { maximum: 8 }, format: { with: VALID_PASSWORD_REGEX }
   validates :password, format: { with: VALID_PASSWORD_REGEX }
 
