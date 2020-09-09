@@ -88,6 +88,7 @@ gem 'devise-i18n-views'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'http'
+gem 'rails-i18n'
 
 # Vue関連
 gem 'webpacker', github: 'rails/webpacker'

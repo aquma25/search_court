@@ -81,7 +81,7 @@
 <p>今いるプレイヤー</p>
 <% unless @play_ground.users.empty? %>
   <% @play_ground.users.each do |user| %>
-    ・@<%= link_to user.nick_name, user_path(user) %>(<%= user.start_play_time.strftime("%Y/%-m/%-d %-H:%-M") %>~)<br/>
+    ・@<%= link_to user.nick_name, user_path(user) %>(<%= user.start_play_time&.strftime("%Y/%-m/%-d %-H:%-M") %>~)<br/>
   <% end %>
 <% else %>
   現在プレイヤーはいません

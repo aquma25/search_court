@@ -11,7 +11,6 @@ class User < ApplicationRecord
   # Validation
   VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i # 半角英数字のみ
   validates :nick_name, presence: true, length: { maximum: 8 }, format: { with: VALID_PASSWORD_REGEX }
-  validates :password, format: { with: VALID_PASSWORD_REGEX }
 
   # carrierwave
   mount_uploader :image, ImageUploader
