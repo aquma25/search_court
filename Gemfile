@@ -91,6 +91,10 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
+# GoogleでのSNS認証
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'http'
