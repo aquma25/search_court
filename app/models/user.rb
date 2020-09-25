@@ -2,16 +2,17 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   # DB Relations
   has_many :court_members, dependent: :destroy
   has_many :play_grounds, through: :court_members
+  has_many :sns_credentials, dependent: :destroy
 
   # Validation
   VALID_PASSWORD_REGEX = /\A[a-z0-9]+\z/i
   validates :nick_name, presence: true, length: { maximum: 8 }, format: { with: VALID_PASSWORD_REGEX }
-  validates :password, format: { with: VALID_PASSWORD_REGEX }
 
   # carrierwave
   mount_uploader :image, ImageUploader
@@ -50,5 +51,14 @@ class User < ApplicationRecord
       court_names = PlayGround.street_courts.map(&:court_name)
       court_names.zip(court_names)
     end
+
+    # 渡されたuidをuser情報と紐付けて保存する
+    def from_omniauth(auth)
+      user = User.where(email: auth.info.email).first
+
+      SnsCredential.where(provider: auth.provider, uid: auth.uid, user_id: user&.id).first_or_create
+      user
+    end
+
   end
 end
