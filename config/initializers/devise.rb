@@ -303,6 +303,6 @@ Devise.setup do |config|
     ENV['GOOGLE_CLIENT_ID'],
     ENV['GOOGLE_CLIENT_SECRET'],
     scope: 'email',
-    redirect_uri: "http://" + ENV['DEV_PATH'] + "/users/auth/google_oauth2/callback"
+    redirect_uri: "http://" + ENV['PRO_PATH'] + "/users/auth/google_oauth2/callback" || "http://" + ENV['DEV_PATH'] + "/users/auth/google_oauth2/callback"
   )
 end
