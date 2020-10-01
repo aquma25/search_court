@@ -54,7 +54,7 @@ PlayGround.create([
     start_time: "19:00:00",
     end_time: "21:00:00",
     usage_fee: nil,
-    usage_week: "火,木"
+    usage_week: ["火曜", "木曜"]
   },
   {
     address: "東京都大田区南蒲田2-10-8",
@@ -86,7 +86,7 @@ PlayGround.create([
     start_time: "18:00:00",
     end_time: "21:15:00",
     usage_fee: 220,
-    usage_week: "月,火,金"
+    usage_week: ["月曜", "火曜", "金曜"]
   },
   {
     address: "神奈川県横浜市元石川町 青葉 JP 新横浜公園内新横浜元石川線高架道路下",
