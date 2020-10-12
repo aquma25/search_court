@@ -71,3 +71,5 @@ yarn-debug.log*
 /public/uploads
 
 /.env
+
+/spec/test_uploads
