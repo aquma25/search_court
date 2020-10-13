@@ -1,5 +1,4 @@
 FactoryBot.define do
-
   factory :play_ground do
     address         { "東京都都渋谷区神南2-3" }
     latitude        { 35.6673 }
@@ -16,5 +15,4 @@ FactoryBot.define do
     usage_fee       { nil }
     usage_week      { nil }
   end
-
 end
