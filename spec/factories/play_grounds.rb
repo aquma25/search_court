@@ -6,7 +6,7 @@ FactoryBot.define do
     court_name      { "代々木公園" }
     content         { "ストリートの聖地。１日中ボーラー達がピックアップで盛り上がっている。外人多め。" }
     place           { "ストリートコート" }
-    status          { 活発 }
+    status          { "活発" }
     release         { nil }
     user_id         { 1 }
     nearest_station { "渋谷" }
